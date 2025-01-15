@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GroupTasker</string>
+    <string name="Auth_title">Войдите или зарегистрируйтесь</string>
+    <string name="Auth_login_button">Вход</string>
+    <string name="Auth_register_button">Регистрация</string>
+</resources>

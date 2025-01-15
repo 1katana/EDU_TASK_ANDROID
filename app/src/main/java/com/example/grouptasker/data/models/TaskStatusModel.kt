@@ -1,5 +1,6 @@
 package com.example.grouptasker.data.models
 
+import com.example.grouptasker.data.roomDb.Entity.TaskStatusEntity
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
@@ -10,8 +11,6 @@ data class TaskStatus(
     val userId: Long,
     val status: Status = Status.NEW,
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     val updatedAt: LocalDateTime? = null
 ) {
     fun isValidForCreate(): Boolean {
@@ -23,5 +22,15 @@ data class TaskStatus(
         return id != null &&
                 task.isValidForUpdate() &&
                 userId > 0
+    }
+
+    fun toEntity(): TaskStatusEntity {
+        return TaskStatusEntity(
+            id = this.id!!,
+            taskId = this.task.id!!,
+            userId = this.userId,
+            status = this.status.name,
+            updatedAt = this.updatedAt!!
+        )
     }
 }

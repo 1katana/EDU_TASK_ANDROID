@@ -13,10 +13,10 @@ import retrofit2.http.Path
 
 interface GroupApi {
     @POST("group")
-    fun createGroup(@Body groupDto: Group): Call<Group>
+    fun createGroup(@Body group: Group): Call<Group>
 
     @PUT("group")
-    fun updateGroup(@Body groupDto: Group): Call<Group>
+    fun updateGroup(@Body group: Group): Call<Group>
 
     @GET("group/{groupId}/user/{userId}")
     fun getTasksByGroupId(@Path("groupId") groupId: Long, @Path("userId") userId: Long): Call<List<TaskStatus>>

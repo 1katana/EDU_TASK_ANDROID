@@ -28,4 +28,7 @@ interface UserApi {
 
     @GET("users/{id}/tasks")
     fun getUserTasks(@Path("id") id: Long): Call<List<TaskStatus>>
+
+    @GET("users/find/{snippetEmail}")
+    fun findUserBySnippetEmail(@Path("snippetEmail")  snippetEmail:String): Call<List<User>>
 }

@@ -1,6 +1,7 @@
 package com.example.grouptasker.data.models
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.example.grouptasker.data.roomDb.Entity.UserEntity
+
 
 data class User(
     val id: Long? = null,
@@ -9,10 +10,10 @@ data class User(
     val email: String,
 
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    val password: String,
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    val password: String? = null,
+
+
     val passwordConfirmations: String? = null
 
 ) {
@@ -20,7 +21,7 @@ data class User(
         return name.isNotBlank() && name.length <= 255 &&
                 lastName.length <= 255 &&
                 email.isNotBlank() && email.length <= 255 &&
-                password.isNotBlank() &&
+                password?.isNotBlank() ?: false &&
                 passwordConfirmations != null && passwordConfirmations.isNotBlank()
     }
 
@@ -29,6 +30,13 @@ data class User(
                 name.isNotBlank() && name.length <= 255 &&
                 lastName.length <= 255 &&
                 email.isNotBlank() && email.length <= 255 &&
-                password.isNotBlank()
+                password?.isNotBlank() ?: false
     }
+
+
+    fun toEntity(): UserEntity {
+        return UserEntity(id = this.id!!, name = this.name, email = this.email, lastName = this.lastName)
+    }
+
+
 }

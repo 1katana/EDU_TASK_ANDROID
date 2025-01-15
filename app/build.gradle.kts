@@ -2,17 +2,17 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
 
 android {
     namespace = "com.example.grouptasker"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.grouptasker"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -44,12 +44,13 @@ android {
 dependencies {
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.navigation.compose)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-    kapt("androidx.room:room-compiler:2.6.1")
+    ksp(libs.androidx.room.compiler)
 
 
 
@@ -75,6 +76,3 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-kapt {
-    correctErrorTypes = true
-}

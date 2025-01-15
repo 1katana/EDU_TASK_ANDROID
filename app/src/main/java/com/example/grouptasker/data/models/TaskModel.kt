@@ -1,21 +1,23 @@
 package com.example.grouptasker.data.models
 
+import com.example.grouptasker.data.roomDb.Entity.TaskEntity
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
+import java.util.Date
 
 data class Task(
     val id: Long? = null,
     val title: String,
     val description: String?,
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+
     val deadline: LocalDateTime,
     val groupId: Long,
     val creatorId: Long,
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     val createdAt: LocalDateTime? = null
 ) {
     fun isValidForCreate(): Boolean {
@@ -32,8 +34,26 @@ data class Task(
                 groupId > 0 &&
                 creatorId > 0
     }
+
+
+    fun toEntity(): TaskEntity {
+        return TaskEntity(
+            id = this.id!!,
+            title = this.title,
+            description = this.description,
+            deadline = this.deadline,
+            groupId = this.groupId,
+            creatorId = this.creatorId,
+            createdAt = this.createdAt!!
+        )
+    }
 }
 
 enum class Status {
-    NEW, IN_PROGRESS, COMPLETED
+    @SerializedName("NEW")
+    NEW,
+    @SerializedName("IN_PROGRESS")
+    IN_PROGRESS,
+    @SerializedName("DONE")
+    DONE
 }

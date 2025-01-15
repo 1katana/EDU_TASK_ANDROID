@@ -1,5 +1,6 @@
 package com.example.grouptasker.data.roomDb.Entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,5 +10,6 @@ data class UserEntity(
     @PrimaryKey val id: Long,
     val name: String,
     val lastName: String?,
-    val email: String
+    val email: String,
+
 )

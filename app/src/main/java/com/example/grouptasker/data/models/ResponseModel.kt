@@ -1,7 +1,8 @@
 package com.example.grouptasker.data.models
+import com.google.gson.annotations.SerializedName
 
 data class Response(
-    val userId: Long,
+    @SerializedName("id") val userId: Long,
     val email: String,
     val accessToken: String,
     val refreshToken: String

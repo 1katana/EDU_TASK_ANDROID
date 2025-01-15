@@ -16,7 +16,7 @@ interface AuthDao {
     @Query("SELECT refreshToken FROM tokens LIMIT 1")
     suspend fun getRefreshToken(): String?
 
-    @Query("SELECT * FROM tokens LIMIT 1")
+    @Query("SELECT userId,email,accessToken,refreshToken FROM tokens LIMIT 1")
     suspend fun getToken(): Response?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,5 +1,6 @@
 package com.example.grouptasker.data.models
 
+import com.example.grouptasker.data.roomDb.Entity.GroupEntity
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
@@ -23,4 +24,12 @@ data class Group(
                 name.isNotBlank() && name.length <= 255 &&
                 creatorId > 0
     }
+
+
+
+    fun toEntity(): GroupEntity {
+        return GroupEntity(id = this.id!!, name = this.name, creatorId = this.creatorId, createdAt = this.createdAt!!)
+    }
+
+
 }
